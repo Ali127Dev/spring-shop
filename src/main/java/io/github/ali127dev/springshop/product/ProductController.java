@@ -1,6 +1,7 @@
 package io.github.ali127dev.springshop.product;
 
 import io.github.ali127dev.springshop.product.dto.CreateProductDTO;
+import io.github.ali127dev.springshop.product.dto.UpdateProductDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,16 @@ public class ProductController {
     @PostMapping("/create")
     public Product create(@Valid @RequestBody CreateProductDTO dto) {
         return service.createProduct(dto);
+    }
+
+    @PostMapping("/update")
+    public Product update(@Valid @RequestBody UpdateProductDTO dto) {
+        return service.updateProduct(dto);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") UUID id) {
+        service.deleteProductByID(id);
     }
 
     @GetMapping

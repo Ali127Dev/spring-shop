@@ -1,6 +1,7 @@
 package io.github.ali127dev.springshop.product;
 
 import io.github.ali127dev.springshop.product.dto.CreateProductDTO;
+import io.github.ali127dev.springshop.product.dto.UpdateProductDTO;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
@@ -21,6 +22,21 @@ public class ProductService {
         product.setPrice(dto.price());
 
         return repository.save(product);
+    }
+
+    public Product updateProduct(UpdateProductDTO dto) {
+        Product product = new Product();
+
+        product.setId(dto.id());
+        product.setTitle(dto.title());
+        product.setDescription(dto.description());
+        product.setPrice(dto.price());
+
+        return repository.save(product);
+    }
+
+    public void deleteProductByID(UUID id) {
+        repository.deleteById(id);
     }
 
     public List<Product> listProducts() {
