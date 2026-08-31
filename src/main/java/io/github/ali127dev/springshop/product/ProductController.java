@@ -39,7 +39,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Product> getByID(@PathVariable("id") UUID id) {
+    public Product getByID(@PathVariable("id") UUID id) {
         return service.getProductByID(id);
     }
 }

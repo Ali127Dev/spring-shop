@@ -2,6 +2,7 @@ package io.github.ali127dev.springshop.product;
 
 import io.github.ali127dev.springshop.product.dto.CreateProductDTO;
 import io.github.ali127dev.springshop.product.dto.UpdateProductDTO;
+import io.github.ali127dev.springshop.product.exception.ProductNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
@@ -25,9 +26,9 @@ public class ProductService {
     }
 
     public Product updateProduct(UpdateProductDTO dto) {
-        Product product = new Product();
+        Product product = repository.findById(dto.id())
+                .orElseThrow(() -> new ProductNotFoundException(dto.id()));
 
-        product.setId(dto.id());
         product.setTitle(dto.title());
         product.setDescription(dto.description());
         product.setPrice(dto.price());
@@ -36,6 +37,9 @@ public class ProductService {
     }
 
     public void deleteProductByID(UUID id) {
+        if (!repository.existsById(id)) {
+            throw new ProductNotFoundException(id);
+        }
         repository.deleteById(id);
     }
 
@@ -43,8 +47,8 @@ public class ProductService {
         return repository.findAll();
     }
 
-    public Optional<Product> getProductByID(UUID id) {
-        return repository.findById(id);
+    public Product getProductByID(UUID id) {
+        return repository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
     }
 }
 
