@@ -3,10 +3,9 @@ package io.github.ali127dev.springshop.product;
 import io.github.ali127dev.springshop.product.dto.CreateProductDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -17,5 +16,10 @@ public class ProductController {
     @PostMapping("/create")
     public Product create(@Valid @RequestBody CreateProductDTO dto) {
         return service.createProduct(dto);
+    }
+
+    @GetMapping
+    public List<Product> list() {
+        return service.listProducts();
     }
 }

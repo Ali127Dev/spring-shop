@@ -3,6 +3,9 @@ package io.github.ali127dev.springshop.product;
 import io.github.ali127dev.springshop.product.dto.CreateProductDTO;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RequiredArgsConstructor
 @org.springframework.stereotype.Service
 public class ProductService {
@@ -16,6 +19,10 @@ public class ProductService {
         product.setPrice(dto.price());
 
         return repository.save(product);
+    }
+
+    public List<Product> listProducts() {
+        return repository.findAll();
     }
 }
 
