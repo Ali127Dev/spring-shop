@@ -2,6 +2,7 @@ package io.github.ali127dev.springshop.product;
 
 import io.github.ali127dev.springshop.product.dto.CreateProductDTO;
 import io.github.ali127dev.springshop.product.dto.UpdateProductDTO;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Tag(name = "Products")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/products")
