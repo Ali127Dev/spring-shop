@@ -1,5 +1,6 @@
 package io.github.ali127dev.springshop.product;
 
+import io.github.ali127dev.springshop.shared.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,12 +13,8 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Entity
-public class ProductEntity {
-
-    @Id
-    @GeneratedValue
-    @UuidGenerator(style = UuidGenerator.Style.VERSION_7)
-    private UUID id;
+@Table(name = "products")
+public class Product extends BaseEntity {
 
     private String title;
 
