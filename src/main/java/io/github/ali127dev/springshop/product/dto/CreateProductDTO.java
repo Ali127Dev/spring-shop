@@ -4,15 +4,5 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-
 public record CreateProductDTO(
-        @NotBlank
-        String title,
-
-        String description,
-
-        @NotNull
-        @Min(0)
-        int price
-) {
-}
+    @NotBlank String title, String description, @NotNull @Min(0) int price) {}
