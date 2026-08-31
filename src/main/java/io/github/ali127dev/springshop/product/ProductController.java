@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
@@ -21,5 +23,10 @@ public class ProductController {
     @GetMapping
     public List<Product> list() {
         return service.listProducts();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Product> getByID(@PathVariable("id") UUID id) {
+        return service.getProductByID(id);
     }
 }
