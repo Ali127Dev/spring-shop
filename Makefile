@@ -1,4 +1,4 @@
-.PHONY: build run test format check clean
+.PHONY: build run test format check lint clean
 
 ifeq ($(OS),Windows_NT)
 MVN := mvnw.cmd
@@ -17,6 +17,9 @@ test:
 
 format:
 	$(MVN) spotless:apply
+
+lint:
+	$(MVN) spotless:check checkstyle:check
 
 check:
 	$(MVN) clean verify
