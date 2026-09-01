@@ -7,7 +7,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public record UpdateProductDTO(
-        @NotBlank @Size(min = 3) @Schema(example = "MacBook Pro") String title,
-        @Schema(example = "the best laptop you've ever seen") String description,
-        @NotNull @Min(0) @Schema(example = "2400") Integer price) {
-}
+    @NotBlank @Size(min = 3) @Schema(example = "MacBook Pro") String title,
+    @Schema(example = "the best laptop you've ever seen") String description,
+    @NotNull @Min(0) @Schema(example = "2400") Integer price) {}

@@ -12,7 +12,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "products")
 public class ProductEntity extends BaseEntity {
-  @Column(nullable = false)
+  @Column(nullable = false, unique = true)
   private String title;
 
   @Lob private String description;
