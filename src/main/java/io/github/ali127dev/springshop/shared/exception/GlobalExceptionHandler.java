@@ -4,6 +4,7 @@ import io.github.ali127dev.springshop.shared.dto.ErrorResponse;
 import jakarta.persistence.OptimisticLockException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -35,6 +36,12 @@ public class GlobalExceptionHandler {
   public ResponseEntity<ErrorResponse> handleValidation(MethodArgumentNotValidException ex) {
     return ResponseEntity.badRequest()
         .body(new ErrorResponse("Invalid request", HttpStatus.BAD_REQUEST.value()));
+  }
+
+  @ExceptionHandler(BadCredentialsException.class)
+  public ResponseEntity<ErrorResponse> handleBadCredentials(BadCredentialsException ex) {
+    return ResponseEntity.badRequest()
+        .body(new ErrorResponse("Invalid email or password", HttpStatus.UNAUTHORIZED.value()));
   }
 
   @ExceptionHandler(Exception.class)
