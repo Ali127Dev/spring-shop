@@ -1,5 +1,6 @@
 package io.github.ali127dev.springshop.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.github.ali127dev.springshop.shared.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -16,6 +17,7 @@ public class User extends BaseEntity {
   String email;
 
   @Column(nullable = false)
+  @JsonIgnore
   String password;
 
   @Column(nullable = false)

@@ -1,5 +1,6 @@
 package io.github.ali127dev.springshop.user;
 
+import io.github.ali127dev.springshop.shared.exception.ResourceAlreadyExistsException;
 import io.github.ali127dev.springshop.user.dto.RegisterUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,6 +13,10 @@ public class UserService {
   private final PasswordEncoder passwordEncoder;
 
   public User register(RegisterUser dto) {
+    if (repository.existsByEmail(dto.email())) {
+      throw new ResourceAlreadyExistsException("User", dto.email());
+    }
+
     User user = new User();
     user.setName(dto.name());
     user.setEmail(dto.email());
