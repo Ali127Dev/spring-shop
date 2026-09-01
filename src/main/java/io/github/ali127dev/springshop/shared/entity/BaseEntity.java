@@ -1,9 +1,6 @@
 package io.github.ali127dev.springshop.shared.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import java.time.Instant;
 import java.util.UUID;
 import lombok.Getter;
@@ -26,4 +23,6 @@ public class BaseEntity {
   private Instant createdAt;
 
   @UpdateTimestamp private Instant updatedAt;
+
+  @Version private Long version;
 }
