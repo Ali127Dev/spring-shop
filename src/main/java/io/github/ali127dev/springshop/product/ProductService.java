@@ -6,13 +6,14 @@ import io.github.ali127dev.springshop.product.exception.ProductNotFoundException
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.NonNull;
 
 @RequiredArgsConstructor
 @org.springframework.stereotype.Service
 public class ProductService {
   private final ProductRepository repository;
 
-  public Product createProduct(CreateProductDTO dto) {
+  public Product createProduct(@NonNull CreateProductDTO dto) {
     Product product = new Product();
 
     product.setTitle(dto.title());
@@ -22,7 +23,7 @@ public class ProductService {
     return repository.save(product);
   }
 
-  public Product updateProduct(UpdateProductDTO dto) {
+  public Product updateProduct(@NonNull UpdateProductDTO dto) {
     Product product =
         repository.findById(dto.id()).orElseThrow(() -> new ProductNotFoundException(dto.id()));
 
