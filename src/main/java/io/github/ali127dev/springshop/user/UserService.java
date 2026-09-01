@@ -1,6 +1,7 @@
 package io.github.ali127dev.springshop.user;
 
 import io.github.ali127dev.springshop.shared.exception.ResourceAlreadyExistsException;
+import io.github.ali127dev.springshop.shared.exception.ResourceNotFoundException;
 import io.github.ali127dev.springshop.user.dto.RegisterUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,5 +25,11 @@ public class UserService {
     user.setRole(UserRole.USER);
 
     return repository.save(user);
+  }
+
+  public User findByEmail(String email) {
+    return repository
+        .findByEmail(email)
+        .orElseThrow(() -> new ResourceNotFoundException("User", email));
   }
 }

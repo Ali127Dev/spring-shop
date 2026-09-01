@@ -1,12 +1,11 @@
 package io.github.ali127dev.springshop.auth;
 
-import io.github.ali127dev.springshop.user.User;
-import io.github.ali127dev.springshop.user.UserRole;
-import io.github.ali127dev.springshop.user.UserService;
+import io.github.ali127dev.springshop.auth.dto.AuthResponse;
+import io.github.ali127dev.springshop.auth.dto.LoginRequest;
 import io.github.ali127dev.springshop.user.dto.RegisterUser;
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,15 +16,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/auth")
+@SecurityRequirements()
 public class AuthController {
-  private final UserService service;
+  private final AuthService authService;
 
   @PostMapping("/register")
-  public UserResponse register(@Valid @RequestBody RegisterUser dto) {
-    User saved = service.register(dto);
+  public AuthResponse register(@Valid @RequestBody RegisterUser dto) {
+    String token = authService.register(dto);
 
-    return new UserResponse(saved.getId(), saved.getName(), saved.getEmail(), saved.getRole());
+    return new AuthResponse(token);
+  }
+
+  @PostMapping("/login")
+  public AuthResponse login(@Valid @RequestBody LoginRequest dto) {
+    String token = authService.login(dto);
+    return new AuthResponse(token);
   }
 }
-
-record UserResponse(UUID id, String name, String email, UserRole role) {}
